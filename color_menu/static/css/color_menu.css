@@ -1,0 +1,34 @@
+.ui-color-menu {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.color-menu-header {
+    padding: 18px 31px 15px 31px;
+    color: #2c2723;
+    font-family: Lato;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1em;
+    text-align: center
+}
+
+.color-menu-item-icon {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: -5px;
+}
+
+
+td.cell-red{
+    background-color: red !important;
+}
+td.cell-yellow {
+    background-color: yellow !important;
+}
+td.cell-white {
+    background-color: white !important;
+}
+td.cell-green {
+    background-color: green !important;
+}
