@@ -1,6 +1,13 @@
-
-const menuTemplate = ({id, classes, height, width, zIndex, menu, scroll}) =>
-`<div tabindex="-1" role="incontent_menu"
+const menuTemplate = ({
+        id,
+        classes,
+        height,
+        width,
+        zIndex,
+        menu,
+        scroll
+    }) =>
+    `<div tabindex="-1" role="incontent_menu"
         class="ui-content_menu ui-corner-all ui-widget ui-widget-content ui-front"
         ${id ? `aria-describedby="${id}"` : ''} style="z-index: ${zIndex};">
     <div ${id ? `id="${id}"` : ''} class="ui-content_menu-content ui-widget-content${classes ? ` ${classes}` : ''}${scroll ? ` ui-scrollable` : ''}" style="width: ${width}; height: ${height};">
@@ -115,14 +122,14 @@ export class ColorMenu {
         }
     }
 
-    onclick(event){
+    onclick(event) {
         event.preventDefault()
         event.stopImmediatePropagation()
         const target = event.target
         if (target.matches('li.content-menu-item')) {
             const menuNumber = target.dataset.index
             const menuItem = this.menu.content[menuNumber]
-            menuItem.action(this.page,this.cells,this.rect)
+            menuItem.action(this.page, this.cells, this.rect)
             this.close()
         }
     }

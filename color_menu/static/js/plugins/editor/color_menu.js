@@ -1,1 +1,4 @@
-export {ColorMenuPlugin} from '../../modules/color_menu'
+export {
+    ColorMenuPlugin
+}
+from '../../modules/color_menu'

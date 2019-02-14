@@ -20,15 +20,26 @@
 }
 
 
-td.cell-red{
+td.cell-red {
     background-color: red !important;
+    caret-color: white;
+    color: white;
 }
+
 td.cell-yellow {
     background-color: yellow !important;
+    caret-color: white;
+    color: white;
 }
+
 td.cell-white {
     background-color: white !important;
+    caret-color: white;
+    color: white;
 }
+
 td.cell-green {
     background-color: green !important;
+    caret-color: white;
+    color: white;
 }
