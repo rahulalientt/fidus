@@ -1,4 +1,4 @@
-import {toggleHeaderRow, toggleHeaderColumn, toggleHeaderCell,TableMap, selectionCell, CellSelection} from "prosemirror-tables"
+import {TableMap, selectionCell, CellSelection} from "prosemirror-tables"
 import {ColorMenu} from './color_menu'
 import {ColorMenuModel} from './model'
 import {Schema} from "prosemirror-model"
@@ -46,13 +46,21 @@ export class ColorMenuPlugin {
         })
 
 
-        
-
-
         this.editor.menu.tableMenuModel.content[11].action = ()=>{
+            this.toggleColor("row",this.editor.currentView)
+        }
 
-            const type = "row"
-            const rect = this.selectedRect(this.editor.currentView.state)
+        this.editor.menu.tableMenuModel.content[12].action = ()=>{
+            this.toggleColor("column",this.editor.currentView)
+        }
+
+        this.editor.menu.tableMenuModel.content[13].action = ()=>{
+            this.toggleColor("cell",this.editor.currentView)
+        }
+    }
+
+    toggleColor(type,view){
+            const rect = this.selectedRect(view.state)
             const cells = rect.map.cellsInRect(type == "column" ? new Rect(rect.left, 0, rect.right, rect.map.height) :
                                              type == "row" ? new Rect(0, rect.top, rect.map.width, rect.bottom) : rect)
             const nodes = cells.map(pos => rect.table.nodeAt(pos))
@@ -60,7 +68,7 @@ export class ColorMenuPlugin {
             for (let i = 0; i < cells.length; i++){
               if (nodes[i].attrs.color !== 'white'){
                 tempColor = nodes[i].attrs.color
-                this.editor.currentView.dispatch(this.editor.currentView.state.tr.setNodeMarkup(rect.tableStart + cells[i],false, {color:'white'}))
+                view.dispatch(view.state.tr.setNodeMarkup(rect.tableStart + cells[i],false, {color:'white'}))
               }
             }
             if (tempColor === 'white'){
@@ -70,65 +78,10 @@ export class ColorMenuPlugin {
                                 page: this.editor,
                                 cells: cells,
                                 rect: rect,
-                                onClose: () => {this.editor.currentView.focus()}
+                                onClose: () => {view.focus()}
                             })
                 colorMenu.open()
             }
-        }
-
-        this.editor.menu.tableMenuModel.content[12].action = ()=>{
-
-            const type = "column"
-            const rect = this.selectedRect(this.editor.currentView.state)
-            const cells = rect.map.cellsInRect(type == "column" ? new Rect(rect.left, 0, rect.right, rect.map.height) :
-                                             type == "row" ? new Rect(0, rect.top, rect.map.width, rect.bottom) : rect)
-            const nodes = cells.map(pos => rect.table.nodeAt(pos))
-            let tempColor = 'white'
-            for (let i = 0; i < cells.length; i++){
-              if (nodes[i].attrs.color !== 'white'){
-                tempColor = nodes[i].attrs.color
-                this.editor.currentView.dispatch(this.editor.currentView.state.tr.setNodeMarkup(rect.tableStart + cells[i],false, {color:'white'}))
-              }
-            }
-            if (tempColor === 'white'){
-                const colorMenu = new ColorMenu({
-                    menu: ColorMenuModel(),
-                    width: 200,
-                    page: this.editor,
-                    cells: cells,
-                    rect: rect,
-                    onClose: () => {this.editor.currentView.focus()}
-                })
-                colorMenu.open()
-            }
-        }
-
-        this.editor.menu.tableMenuModel.content[13].action = ()=>{
-
-            const type = "cell"
-            const rect = this.selectedRect(this.editor.currentView.state)
-            const cells = rect.map.cellsInRect(type == "column" ? new Rect(rect.left, 0, rect.right, rect.map.height) :
-                                             type == "row" ? new Rect(0, rect.top, rect.map.width, rect.bottom) : rect)
-            const nodes = cells.map(pos => rect.table.nodeAt(pos))
-            let tempColor = 'white'
-            for (let i = 0; i < cells.length; i++){
-              if (nodes[i].attrs.color !== 'white'){
-                tempColor = nodes[i].attrs.color
-                this.editor.currentView.dispatch(this.editor.currentView.state.tr.setNodeMarkup(rect.tableStart + cells[i],false, {color:'white'}))
-              }
-            }
-            if (tempColor === 'white'){
-                const colorMenu = new ColorMenu({
-                    menu: ColorMenuModel(),
-                    width: 200,
-                    page: this.editor,
-                    cells: cells,
-                    rect: rect,
-                    onClose: () => {this.editor.currentView.focus()}
-                })
-                colorMenu.open()
-            }
-        }
     }
 
      selectedRect(state) {
@@ -150,4 +103,5 @@ export class ColorMenuPlugin {
         for (let d = $head.depth; d > 0; d--) if ($head.node(d).type.spec.tableRole == "row") return $head.node(d)
         return false
     }
+
 }

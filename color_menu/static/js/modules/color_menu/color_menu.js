@@ -4,7 +4,7 @@ const menuTemplate = ({id, classes, height, width, zIndex, menu, scroll}) =>
         class="ui-content_menu ui-corner-all ui-widget ui-widget-content ui-front"
         ${id ? `aria-describedby="${id}"` : ''} style="z-index: ${zIndex};">
     <div ${id ? `id="${id}"` : ''} class="ui-content_menu-content ui-widget-content${classes ? ` ${classes}` : ''}${scroll ? ` ui-scrollable` : ''}" style="width: ${width}; height: ${height};">
-    <div class="color-menu-header">${gettext("Select color for your header")}
+    <div class="color-menu-header">${gettext("Select color for your Cell(s)")}
     </div>
     <hr class="content-menu-item-divider"/>
     <div>
