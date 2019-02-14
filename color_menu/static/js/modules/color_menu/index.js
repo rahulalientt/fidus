@@ -25,7 +25,7 @@ export class ColorMenuPlugin {
             `<link rel="stylesheet" href="${this.editor.staticUrl}css/color_menu.css" />`
         )
 
-
+        /* Updating the existing schema of a tablecell to add a color attribute */
         const specNodes = this.editor.schema.spec.nodes
         const tableCellSpec = specNodes.get("table_cell")
         this.editor.schema = new Schema({
@@ -58,19 +58,21 @@ export class ColorMenuPlugin {
                 })
             )
         })
+
+
         this.editor.menu.tableMenuModel.content[13].title = gettext('Toggle cell color')
         this.editor.menu.tableMenuModel.content[13].tooltip = gettext('Toggle color of currently selected cells')
-        this.editor.menu.tableMenuModel.content[13].action = () => {
+        this.editor.menu.tableMenuModel.content[13].action = () => { //Overriding the existing action on toggle cell with this plugin
             this.toggleColor(this.editor.currentView)
         }
     }
 
     toggleColor(view) {
-        const rect = this.selectedRect(view.state)
+        const rect = this.selectedRect(view.state) // current cell 
         const cells = rect.map.cellsInRect(rect)
         const nodes = cells.map(pos => rect.table.nodeAt(pos))
         let tempColor = ''
-        for (let i = 0; i < cells.length; i++) {
+        for (let i = 0; i < cells.length; i++) { //checking if cell already have some color.(remove the color)
             if (nodes[i].type.name === "table_header") {
                 toggleHeaderCell(this.editor.currentView.state, this.editor.currentView.dispatch)
             } else if (nodes[i].attrs.color !== '') {
@@ -80,7 +82,7 @@ export class ColorMenuPlugin {
                 }))
             }
         }
-        if (tempColor === '') {
+        if (tempColor === '') { // if cell doesn't have some color.(show the menu)
             const colorMenu = new ColorMenu({
                 menu: ColorMenuModel(),
                 width: 200,
@@ -95,7 +97,7 @@ export class ColorMenuPlugin {
         }
     }
 
-    selectedRect(state) {
+    selectedRect(state) { //returns the current cell obj.
         const sel = state.selection,
             $pos = selectionCell(state)
         const table = $pos.node(-1),

@@ -6,11 +6,7 @@ export const ColorMenuModel = () => ({
             order: 0,
             color: "red",
             action: (editor, cells, rect) => {
-                for (let i = 0; i < cells.length; i++) {
-                    editor.currentView.dispatch(editor.currentView.state.tr.setNodeMarkup(rect.tableStart + cells[i], false, {
-                        color: 'red'
-                    }))
-                }
+                toggleColor(editor, cells, rect, 'red')
             }
         },
         {
@@ -24,11 +20,7 @@ export const ColorMenuModel = () => ({
             order: 2,
             color: "yellow",
             action: (editor, cells, rect) => {
-                for (let i = 0; i < cells.length; i++) {
-                    editor.currentView.dispatch(editor.currentView.state.tr.setNodeMarkup(rect.tableStart + cells[i], false, {
-                        color: 'yellow'
-                    }))
-                }
+                toggleColor(editor, cells, rect, 'yellow')
             }
         },
         {
@@ -42,12 +34,16 @@ export const ColorMenuModel = () => ({
             order: 4,
             color: "green",
             action: (editor, cells, rect) => {
-                for (let i = 0; i < cells.length; i++) {
-                    editor.currentView.dispatch(editor.currentView.state.tr.setNodeMarkup(rect.tableStart + cells[i], false, {
-                        color: 'green'
-                    }))
-                }
+                toggleColor(editor, cells, rect, 'green')
             }
         }
     ]
 })
+
+const toggleColor = (editor, cells, rect, color) => { // change the color of the cells
+    for (let i = 0; i < cells.length; i++) {
+        editor.currentView.dispatch(editor.currentView.state.tr.setNodeMarkup(rect.tableStart + cells[i], false, {
+            color
+        }))
+    }
+}

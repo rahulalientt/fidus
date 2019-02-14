@@ -1,3 +1,5 @@
+// Template for Color menu 
+
 const menuTemplate = ({
         id,
         classes,
