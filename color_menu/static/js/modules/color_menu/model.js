@@ -4,7 +4,7 @@ export const ColorMenuModel = () => ({
             type: 'action',
             tooltip: gettext('Red'),
             order: 0,
-            color: "red",
+            color: "#ff9999", //color code
             action: (editor, cells, rect) => {
                 toggleColor(editor, cells, rect, 'red')
             }
@@ -18,7 +18,7 @@ export const ColorMenuModel = () => ({
             type: 'action',
             tooltip: gettext('Yellow'),
             order: 2,
-            color: "yellow",
+            color: "#ffffcc", //color code
             action: (editor, cells, rect) => {
                 toggleColor(editor, cells, rect, 'yellow')
             }
@@ -32,7 +32,7 @@ export const ColorMenuModel = () => ({
             type: 'action',
             tooltip: gettext('Green'),
             order: 4,
-            color: "green",
+            color: "#ccffcc", //color code
             action: (editor, cells, rect) => {
                 toggleColor(editor, cells, rect, 'green')
             }

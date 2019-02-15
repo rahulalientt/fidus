@@ -21,25 +21,17 @@
 
 
 td.cell-red {
-    background-color: red !important;
-    caret-color: white;
-    color: white;
+    background-color: #ff9999 !important;
 }
 
 td.cell-yellow {
-    background-color: yellow !important;
-    caret-color: white;
-    color: white;
+    background-color: #ffffcc !important;
 }
 
 td.cell-white {
     background-color: white !important;
-    caret-color: white;
-    color: white;
 }
 
 td.cell-green {
-    background-color: green !important;
-    caret-color: white;
-    color: white;
+    background-color: #ccffcc !important;
 }
